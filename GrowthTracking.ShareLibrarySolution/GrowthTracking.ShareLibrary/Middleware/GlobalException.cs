@@ -99,7 +99,7 @@ namespace GrowthTracking.ShareLibrary.Middleware
                 {
                     Success = false,
                     Message = exception.Message,
-                    Data = exception.StackTrace.Split("\n").ToArray()
+                    Data = exception.StackTrace?.Split("\n")?.ToArray() ?? Array.Empty<string>()
                 }.ToString() ?? string.Empty);
             }
         }
