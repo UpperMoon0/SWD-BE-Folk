@@ -6,6 +6,7 @@ using ParentManageApi.Application.Interfaces;
 using System.Security.Claims;
 using GrowthTracking.ShareLibrary.Logs;
 using ParentManagementAPI.Application.DTOs; 
+using System.Collections.Generic;
 
 namespace ParentManageApi.Presentation.Controllers
 {
@@ -14,7 +15,7 @@ namespace ParentManageApi.Presentation.Controllers
     public class ParentController(IParentService parentService) : ControllerBase
     {
         [HttpPost]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> CreateParent([FromBody] ParentDTO parentDTO)
         {
             var parentId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -29,17 +30,17 @@ namespace ParentManageApi.Presentation.Controllers
             if (response.Flag)
             {
                 LogHandler.LogToConsole($"Successfully created parent with ParentId: {parsedParentId}");
-                return Ok(new ApiResponse(true, response.Message, null));
+                return Ok(new ApiResponse(true, response.Message, Array.Empty<object>()));
             }
             else
             {
                 LogHandler.LogToDebugger($"Failed to create parent with ParentId: {parsedParentId}. Reason: {response.Message}");
-                return BadRequest(new ApiResponse(false, response.Message, null));
+                return BadRequest(new ApiResponse(false, response.Message, Array.Empty<object>()));
             }
         }
 
         [HttpPut]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> UpdateParent([FromBody] ParentDTO parentDTO)
         {
             var parentId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -54,17 +55,17 @@ namespace ParentManageApi.Presentation.Controllers
             if (response.Flag)
             {
                 LogHandler.LogToConsole($"Successfully updated parent with ParentId: {parsedParentId}");
-                return Ok(new ApiResponse(true, response.Message, null));
+                return Ok(new ApiResponse(true, response.Message, Array.Empty<object>()));
             }
             else
             {
                 LogHandler.LogToDebugger($"Failed to update parent with ParentId: {parsedParentId}. Reason: {response.Message}");
-                return BadRequest(new ApiResponse(false, response.Message, null));
+                return BadRequest(new ApiResponse(false, response.Message, Array.Empty<object>()));
             }
         }
 
         [HttpGet("{parentId}")]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> GetParent([FromRoute] Guid parentId)
         {
             LogHandler.LogToFile($"Starting GetParent for ParentId: {parentId}");
@@ -72,7 +73,7 @@ namespace ParentManageApi.Presentation.Controllers
             if (parent == null)
             {
                 LogHandler.LogToDebugger($"Parent with ParentId: {parentId} not found");
-                return NotFound(new ApiResponse(false, "Parent not found", null));
+                return NotFound(new ApiResponse(false, "Parent not found", Array.Empty<object>()));
             }
 
             LogHandler.LogToConsole($"Successfully retrieved parent with ParentId: {parentId}");
@@ -80,7 +81,7 @@ namespace ParentManageApi.Presentation.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> GetAllParents()
         {
             LogHandler.LogToFile("Starting GetAllParents");
@@ -90,7 +91,7 @@ namespace ParentManageApi.Presentation.Controllers
         }
 
         [HttpDelete("{parentId}")]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> DeleteParent([FromRoute] Guid parentId)
         {
             LogHandler.LogToFile($"Starting DeleteParent for ParentId: {parentId}");
@@ -98,13 +99,30 @@ namespace ParentManageApi.Presentation.Controllers
             if (response.Flag)
             {
                 LogHandler.LogToConsole($"Successfully deleted parent with ParentId: {parentId}");
-                return Ok(new ApiResponse(true, response.Message, null));
+                return Ok(new ApiResponse(true, response.Message, Array.Empty<object>()));
             }
             else
             {
                 LogHandler.LogToDebugger($"Failed to delete parent with ParentId: {parentId}. Reason: {response.Message}");
-                return NotFound(new ApiResponse(false, response.Message, null));
+                return NotFound(new ApiResponse(false, response.Message, Array.Empty<object>()));
             }
+        }
+
+        [HttpGet("{parentId}/children")]
+        // [Authorize]
+        public async Task<IActionResult> GetChildrenByParent(Guid parentId)
+        {
+            LogHandler.LogToFile($"Starting GetChildrenByParent for ParentId: {parentId}");
+            
+            // Since we don't have direct access to ChildApi from ParentManagement service,
+            // we'll return a message guiding the user to use the ChildApi endpoint instead
+            LogHandler.LogToConsole($"Redirecting children request to Child API for parent: {parentId}");
+            
+            return Ok(new ApiResponse(
+                true, 
+                "This endpoint is now handled by the Child API. Please use GET /api/child/parent/{parentId} endpoint.",
+                Array.Empty<object>()
+            ));
         }
     }
 }

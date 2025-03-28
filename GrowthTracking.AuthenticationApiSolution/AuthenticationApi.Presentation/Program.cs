@@ -107,7 +107,8 @@ internal class Program
         app.UseHttpsRedirection();
 
         // Add Authentication before Authorization
-        app.UseAuthentication();
+        // Authentication disabled for testing purposes - JWT is still generated for role specification
+        // app.UseAuthentication();
         app.UseAuthorization();
 
         // Apply Infrastructure Policies

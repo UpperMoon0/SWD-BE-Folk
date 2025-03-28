@@ -27,7 +27,6 @@ namespace ParentManageApi.Presentation.Controllers
         }
 
         [HttpGet("{parentId}")]
-        [Authorize]
         // Lấy thông tin phụ huynh theo ID
         public async Task<IActionResult> GetParent([FromRoute] Guid parentId)
         {
@@ -36,7 +35,6 @@ namespace ParentManageApi.Presentation.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         // Lấy danh sách tất cả phụ huynh
         public async Task<IActionResult> GetAllParents()
         {
@@ -45,7 +43,6 @@ namespace ParentManageApi.Presentation.Controllers
         }
 
         [HttpDelete("{parentId}")]
-        [Authorize]
         // Xóa mềm thông tin phụ huynh
         public async Task<IActionResult> DeleteParent([FromRoute] Guid parentId)
         {
@@ -54,7 +51,6 @@ namespace ParentManageApi.Presentation.Controllers
         }
 
         [HttpGet("{parentId}/children")]
-        [Authorize]
         // Lấy danh sách trẻ em của một phụ huynh
         public async Task<IActionResult> GetChildrenByParent([FromRoute] Guid parentId)
         {

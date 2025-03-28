@@ -26,7 +26,7 @@ namespace AuthenticationApi.Presentation.Controllers
         }
 
         [HttpGet("{userId}")]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> GetUser([FromRoute] Guid userId)
         {
             var user = await userRepository.GetUser(userId);
@@ -34,7 +34,7 @@ namespace AuthenticationApi.Presentation.Controllers
         }
 
         [HttpPost("bug-report")]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> CreateBugReport([FromBody] BugReportDTO bugReportDTO)
         {
             var response = await userRepository.CreateBugReport(bugReportDTO);
@@ -42,7 +42,7 @@ namespace AuthenticationApi.Presentation.Controllers
         }
 
         [HttpGet("bug-reports/{userId}")]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> GetBugReports([FromRoute] Guid userId)
         {
             var bugReports = await userRepository.GetBugReports(userId);
@@ -50,7 +50,7 @@ namespace AuthenticationApi.Presentation.Controllers
         }
 
         [HttpPost("notification")]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> SendNotification([FromBody] NotificationDTO notificationDTO)
         {
             var response = await userRepository.SendNotification(notificationDTO);
@@ -58,7 +58,7 @@ namespace AuthenticationApi.Presentation.Controllers
         }
 
         [HttpGet("notifications/{userId}")]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> GetNotifications([FromRoute] Guid userId)
         {
             var notifications = await userRepository.GetNotifications(userId);

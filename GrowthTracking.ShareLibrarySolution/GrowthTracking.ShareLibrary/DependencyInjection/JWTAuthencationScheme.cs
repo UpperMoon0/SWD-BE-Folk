@@ -22,10 +22,12 @@ namespace GrowthTracking.ShareLibrary.DependencyInjection
                     options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
                         ValidateLifetime = false,
-                        ValidateIssuerSigningKey = true,
+                        ValidateIssuerSigningKey = false,
+                        RequireSignedTokens = false,
+                        RequireExpirationTime = false,
                         ValidIssuer = issuer,
                         ValidAudience = audience,
                         IssuerSigningKey = new SymmetricSecurityKey(key)

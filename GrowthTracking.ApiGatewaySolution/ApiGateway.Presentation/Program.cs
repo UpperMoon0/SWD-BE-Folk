@@ -3,15 +3,23 @@ using GrowthTracking.ShareLibrary.DependencyInjection;
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 
+// For development - ignore SSL certificate validation issues
+if (builder.Environment.IsDevelopment())
+{
+    ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+}
+
 builder.Services.AddOcelot().AddCacheManager(x => x.WithDictionaryHandle());
 
-JWTAuthencationScheme.AddJWTAuthencationScheme(builder.Services, builder.Configuration);
+// Authentication disabled for testing purposes
+// JWTAuthencationScheme.AddJWTAuthencationScheme(builder.Services, builder.Configuration);
 
 builder.Services.AddCors(options =>
 {

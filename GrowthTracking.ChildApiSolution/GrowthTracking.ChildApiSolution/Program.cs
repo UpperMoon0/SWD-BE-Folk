@@ -4,6 +4,11 @@ using ChildApi.Infrastructure.Repositories;
 using ChildApi.Application.Interfaces;
 using ChildApi.Application.Messaging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Diagnostics;
+using System.Net;
+using GrowthTracking.ShareLibrary.Response;
+using System.Text.Json;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +35,47 @@ builder.Services.AddScoped<IMilestoneRepository, MilestoneRepository>();
 builder.Services.AddSingleton<ParentIdCache>();
 builder.Services.AddHostedService<ParentEventConsumer>();
 
+// Add authentication with a default scheme but don't enforce it
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = false,
+            ValidateIssuerSigningKey = false,
+            RequireSignedTokens = false,
+            RequireExpirationTime = false
+        };
+    });
+
 var app = builder.Build();
+
+// Global exception handler
+app.UseExceptionHandler(appError =>
+{
+    appError.Run(async context =>
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        context.Response.ContentType = "application/json";
+        
+        var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+        if (contextFeature != null)
+        {
+            Console.WriteLine($"Error: {contextFeature.Error}");
+            
+            await context.Response.WriteAsync(JsonSerializer.Serialize(new ApiResponse 
+            { 
+                Success = false, 
+                Message = "Internal Server Error. Please try again later.",
+                Data = app.Environment.IsDevelopment() ? contextFeature.Error.ToString() : null
+            }));
+        }
+    });
+});
 
 // Cấu hình Swagger cho môi trường Development
 if (app.Environment.IsDevelopment())
@@ -43,10 +88,19 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+// Add CORS for API testing
+app.UseCors(builder => builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
 app.UseHttpsRedirection();
 
-// Nếu có xác thực thì kích hoạt Authentication
+// Uncomment this line to use authentication - we're keeping it commented
+// but now the app has a default scheme configured
 // app.UseAuthentication();
+
+// Keep authorization middleware for role-based permissions if needed later
 app.UseAuthorization();
 
 app.MapControllers();

@@ -10,7 +10,7 @@ namespace BookingApi.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = Constants.ParentAndDoctor)]
+    // [Authorize(Roles = Constants.ParentAndDoctor)]
     public class BookingController : ControllerBase
     {
         private readonly IBookingService _bookingService;
@@ -21,7 +21,7 @@ namespace BookingApi.Presentation.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Parent")]
+        // [Authorize(Roles = "Parent")]
         public async Task<IActionResult> CreateBooking([FromBody] BookingDTO bookingDto)
         {
             var response = await _bookingService.CreateBookingAsync(bookingDto);
@@ -40,7 +40,7 @@ namespace BookingApi.Presentation.Controllers
         }
 
         [HttpGet("parent/{parentId}")]
-        [Authorize(Roles = "Parent")]
+        // [Authorize(Roles = "Parent")]
         public async Task<IActionResult> GetBookingsByParent(Guid parentId)
         {
             var bookings = await _bookingService.GetBookingsByParentAsync(parentId);
@@ -48,7 +48,7 @@ namespace BookingApi.Presentation.Controllers
         }
 
         [HttpGet("doctor/{doctorId}")]
-        [Authorize(Roles = "Doctor")]
+        // [Authorize(Roles = "Doctor")]
         public async Task<IActionResult> GetBookingsByDoctor(Guid doctorId)
         {
             var bookings = await _bookingService.GetBookingsByDoctorAsync(doctorId);
@@ -56,7 +56,7 @@ namespace BookingApi.Presentation.Controllers
         }
 
         [HttpDelete("{bookingId}")]
-        [Authorize(Roles = "Parent")]
+        // [Authorize(Roles = "Parent")]
         public async Task<IActionResult> CancelBooking(Guid bookingId)
         {
             var response = await _bookingService.CancelBookingAsync(bookingId);

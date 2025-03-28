@@ -1,6 +1,6 @@
 {
   "Routes": [
-    // JWT Authentication
+    
     {
       "DownstreamPathTemplate": "/api/auth/{everything}",
       "DownstreamScheme": "http",
@@ -20,7 +20,7 @@
         "PeriodTimespan": 10
       }
     },
-    // User Existence Check
+    
     {
       "DownstreamPathTemplate": "/api/users/{id}",
       "DownstreamScheme": "http",
@@ -31,15 +31,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/users/{id}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
 
-    // Doctor APIs (DoctorService)
-    // Get All Doctors (Public)
+    
+    
     {
       "DownstreamPathTemplate": "/api/doctors",
       "DownstreamScheme": "http",
@@ -52,7 +48,7 @@
       "UpstreamPathTemplate": "/api/doctors",
       "UpstreamHttpMethod": [ "GET" ]
     },
-    // Get Doctor by ID (Public)
+    
     {
       "DownstreamPathTemplate": "/api/doctors/{id}",
       "DownstreamScheme": "http",
@@ -65,7 +61,7 @@
       "UpstreamPathTemplate": "/api/doctors/{id}",
       "UpstreamHttpMethod": [ "GET" ]
     },
-    // Search Doctors (Public)
+    
     {
       "DownstreamPathTemplate": "/api/doctors/search",
       "DownstreamScheme": "http",
@@ -78,7 +74,7 @@
       "UpstreamPathTemplate": "/api/doctors/search",
       "UpstreamHttpMethod": [ "GET" ]
     },
-    // Create Doctor (Requires Authentication)
+    
     {
       "DownstreamPathTemplate": "/api/doctors",
       "DownstreamScheme": "http",
@@ -89,12 +85,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctors",
-      "UpstreamHttpMethod": [ "POST" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "POST" ]
     },
-    // Update Doctor (Requires Authentication)
+    
     {
       "DownstreamPathTemplate": "/api/doctors/{id}",
       "DownstreamScheme": "http",
@@ -105,12 +98,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctors/{id}",
-      "UpstreamHttpMethod": [ "PUT" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "PUT" ]
     },
-    // Delete Doctor (Requires Authentication)
+    
     {
       "DownstreamPathTemplate": "/api/doctors/{id}",
       "DownstreamScheme": "http",
@@ -121,14 +111,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctors/{id}",
-      "UpstreamHttpMethod": [ "DELETE" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "DELETE" ]
     },
 
-    // Parent APIs (ParentService)
-    // Create Parent (Requires Authentication)
+    
+    
     {
       "DownstreamPathTemplate": "/api/parent",
       "DownstreamScheme": "http",
@@ -139,12 +126,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/parent",
-      "UpstreamHttpMethod": [ "POST" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "POST" ]
     },
-    // Update Parent (Requires Authentication)
+    
     {
       "DownstreamPathTemplate": "/api/parent",
       "DownstreamScheme": "http",
@@ -155,12 +139,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/parent",
-      "UpstreamHttpMethod": [ "PUT" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "PUT" ]
     },
-    // Get Parent by ID (Requires Authentication)
+    
     {
       "DownstreamPathTemplate": "/api/parent/{parentId}",
       "DownstreamScheme": "http",
@@ -171,12 +152,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/parent/{parentId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
-    // Get All Parents (Requires Authentication)
+    
     {
       "DownstreamPathTemplate": "/api/parent",
       "DownstreamScheme": "http",
@@ -187,12 +165,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/parent",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
-    // Delete Parent (Requires Authentication)
+    
     {
       "DownstreamPathTemplate": "/api/parent/{parentId}",
       "DownstreamScheme": "http",
@@ -203,17 +178,14 @@
         }
       ],
       "UpstreamPathTemplate": "/api/parent/{parentId}",
-      "UpstreamHttpMethod": [ "DELETE" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "DELETE" ]
     },
 
-    // Child APIs (ChildService)
-    // Create Child (Requires Authentication)
+    
+    
     {
       "DownstreamPathTemplate": "/api/child",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -221,15 +193,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/child",
-      "UpstreamHttpMethod": [ "POST" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "POST" ]
     },
-    // Get Child by ID (Requires Authentication)
+    
     {
       "DownstreamPathTemplate": "/api/child/{childId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -237,15 +206,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/child/{childId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
-    // Update Child (Requires Authentication)
+    
     {
       "DownstreamPathTemplate": "/api/child/{childId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -253,15 +219,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/child/{childId}",
-      "UpstreamHttpMethod": [ "PUT" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "PUT" ]
     },
-    // Delete Child (Requires Authentication)
+    
     {
       "DownstreamPathTemplate": "/api/child/{childId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -269,15 +232,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/child/{childId}",
-      "UpstreamHttpMethod": [ "DELETE" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "DELETE" ]
     },
-    // Get Children by Parent ID (Requires Authentication)
+    
     {
       "DownstreamPathTemplate": "/api/child/parent/{parentId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -285,15 +245,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/child/parent/{parentId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
-    // Get Child BMI (Requires Authentication)
+    
     {
       "DownstreamPathTemplate": "/api/child/bmi/{childId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -301,15 +258,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/child/bmi/{childId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
-    // Get Child Growth Analysis (Requires Authentication)
+    
     {
       "DownstreamPathTemplate": "/api/child/growth/{childId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -317,14 +271,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/child/growth/{childId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
 
-    // Booking APIs (BookingService)
-    // Create Booking (Requires Authentication, Role: Parent)
+    
+    
     {
       "DownstreamPathTemplate": "/api/booking",
       "DownstreamScheme": "http",
@@ -335,13 +286,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/booking",
-      "UpstreamHttpMethod": [ "POST" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "POST" ]
     },
-    // Get Booking by ID (Requires Authentication, Role: ParentAndDoctor)
+    
     {
       "DownstreamPathTemplate": "/api/booking/{bookingId}",
       "DownstreamScheme": "http",
@@ -352,13 +299,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/booking/{bookingId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
-    // Get Bookings by Parent ID (Requires Authentication, Role: Parent)
+    
     {
       "DownstreamPathTemplate": "/api/booking/parent/{parentId}",
       "DownstreamScheme": "http",
@@ -369,13 +312,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/booking/parent/{parentId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
-    // Get Bookings by Doctor ID (Requires Authentication, Role: Doctor)
+    
     {
       "DownstreamPathTemplate": "/api/booking/doctor/{doctorId}",
       "DownstreamScheme": "http",
@@ -386,13 +325,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/booking/doctor/{doctorId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
-    // Cancel Booking (Requires Authentication, Role: Parent)
+    
     {
       "DownstreamPathTemplate": "/api/booking/{bookingId}",
       "DownstreamScheme": "http",
@@ -403,15 +338,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/booking/{bookingId}",
-      "UpstreamHttpMethod": [ "DELETE" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "DELETE" ]
     },
 
-    // Consultation APIs (BookingService)
-    // Create Consultation (Requires Authentication, Role: Doctor)
+    
+    
     {
       "DownstreamPathTemplate": "/api/consultation",
       "DownstreamScheme": "http",
@@ -422,13 +353,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/consultation",
-      "UpstreamHttpMethod": [ "POST" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "POST" ]
     },
-    // Update Consultation (Requires Authentication, Role: Doctor)
+    
     {
       "DownstreamPathTemplate": "/api/consultation/{consultationId}",
       "DownstreamScheme": "http",
@@ -439,13 +366,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/consultation/{consultationId}",
-      "UpstreamHttpMethod": [ "PUT" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "PUT" ]
     },
-    // Get Consultation by ID (Requires Authentication, Role: ParentAndDoctor)
+    
     {
       "DownstreamPathTemplate": "/api/consultation/{consultationId}",
       "DownstreamScheme": "http",
@@ -456,13 +379,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/consultation/{consultationId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
-    // Get Consultations by Doctor ID (Requires Authentication, Role: Doctor)
+    
     {
       "DownstreamPathTemplate": "/api/consultation/doctor/{doctorId}",
       "DownstreamScheme": "http",
@@ -473,13 +392,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/consultation/doctor/{doctorId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
-    // Get Consultations by Booking ID (Requires Authentication, Role: ParentAndDoctor)
+    
     {
       "DownstreamPathTemplate": "/api/consultation/booking/{bookingId}",
       "DownstreamScheme": "http",
@@ -490,13 +405,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/consultation/booking/{bookingId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
-    // Cancel Consultation (Requires Authentication, Role: Doctor)
+    
     {
       "DownstreamPathTemplate": "/api/consultation/{consultationId}",
       "DownstreamScheme": "http",
@@ -507,15 +418,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/consultation/{consultationId}",
-      "UpstreamHttpMethod": [ "DELETE" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "DELETE" ]
     },
 
-    // Schedule APIs (BookingService)
-    // Create Schedule (Requires Authentication, Role: Doctor)
+    
+    
     {
       "DownstreamPathTemplate": "/api/schedule",
       "DownstreamScheme": "http",
@@ -526,13 +433,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/schedule",
-      "UpstreamHttpMethod": [ "POST" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "POST" ]
     },
-    // Update Schedule (Requires Authentication, Role: Doctor)
+    
     {
       "DownstreamPathTemplate": "/api/schedule/{scheduleId}",
       "DownstreamScheme": "http",
@@ -543,13 +446,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/schedule/{scheduleId}",
-      "UpstreamHttpMethod": [ "PUT" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "PUT" ]
     },
-    // Get Schedule by ID (Requires Authentication, Role: Doctor)
+    
     {
       "DownstreamPathTemplate": "/api/schedule/{scheduleId}",
       "DownstreamScheme": "http",
@@ -560,13 +459,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/schedule/{scheduleId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
-    // Get Schedules by Doctor ID (Requires Authentication, Role: Doctor)
+    
     {
       "DownstreamPathTemplate": "/api/schedule/doctor/{doctorId}",
       "DownstreamScheme": "http",
@@ -577,13 +472,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/schedule/doctor/{doctorId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     },
-    // Delete Schedule (Requires Authentication, Role: Doctor)
+    
     {
       "DownstreamPathTemplate": "/api/schedule/{scheduleId}",
       "DownstreamScheme": "http",
@@ -594,15 +485,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/schedule/{scheduleId}",
-      "UpstreamHttpMethod": [ "DELETE" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      "UpstreamHttpMethod": [ "DELETE" ]
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5000",
+    "BaseUrl": "http://localhost:7199",
     "RateLimitOptions": {
       "QuotaExceededMessage": "API rate limit exceeded!"
     }

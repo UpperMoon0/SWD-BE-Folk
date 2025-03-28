@@ -57,7 +57,8 @@ if (app.Environment.IsDevelopment())
 }
 
 // Middleware Authentication và Authorization
-app.UseAuthentication();
+// Authentication disabled for testing purposes
+// app.UseAuthentication();
 app.UseAuthorization();
 
 // Ánh xạ Controller
